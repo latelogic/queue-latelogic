@@ -1,101 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How It Works | Queue</title>
+    <title>How it Works - FlightQueue API</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        neon: {
+                            blue: '#3b82f6',
+                            green: '#22c55e',
+                            cyan: '#06b6d4',
+                            purple: '#a855f7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-bg {
+            background-color: #1e1e1e;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+<body class="bg-slate-950 text-gray-200 font-sans antialiased">
+
     <!-- Navbar -->
-    <nav class="bg-white border-b border-slate-200">
+    <nav class="fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                         <a href="index.html" class="text-2xl font-bold text-blue-600 tracking-tighter">Queue.</a>
+            <div class="flex justify-between h-16 items-center">
+                <a href="/" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-neon-blue flex items-center justify-center">
+                        <i class="fa-solid fa-plane-up text-white text-sm transform -rotate-45"></i>
                     </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="index.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
-                        <a href="realtime-dashboard.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboard</a>
-                        <a href="how-it-works.html" class="border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">How it Works</a>
-                        <a href="pricing.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Pricing</a>
-                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white font-mono">FlightQueue<span class="text-neon-cyan">_API</span></span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="/realtime-dashboard.html" class="text-gray-400 hover:text-white text-sm font-medium transition-colors">Live Dashboard</a>
+                    <a href="/pricing.html" class="text-gray-400 hover:text-white text-sm font-medium transition-colors">Pricing</a>
+                    <a href="/how-it-works.html" class="text-white text-sm font-medium transition-colors">How it Works</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="py-16 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-blue-600 tracking-wide uppercase">The Technology</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-                    Data-Driven Intelligence
-                </p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-                    We combine public aviation data with proprietary crowd-sourcing algorithms to predict delays before they happen.
-                </p>
-            </div>
+    <!-- Header -->
+    <div class="pt-32 pb-20 text-center px-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-white font-mono mb-6">Data Architecture</h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            We aggregate 50+ data sources into a single, unified JSON API.
+        </p>
+    </div>
 
-            <div class="mt-20">
-                <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
-                    <div class="space-y-5">
-                        <span class="h-12 w-12 rounded-md bg-blue-500 flex items-center justify-center">
-                            <i class="fas fa-satellite text-white text-xl"></i>
-                        </span>
-                        <h3 class="text-2xl font-bold leading-6 text-gray-900">ADS-B Tracking</h3>
-                        <p class="text-lg text-gray-500">
-                            We listen to Automatic Dependent Surveillance–Broadcast signals directly from aircraft. This gives us raw, unfiltered position data often faster than airport displays.
-                        </p>
-                    </div>
-                    
-                    <div class="space-y-5">
-                        <span class="h-12 w-12 rounded-md bg-blue-500 flex items-center justify-center">
-                            <i class="fas fa-mobile-alt text-white text-xl"></i>
-                        </span>
-                        <h3 class="text-2xl font-bold leading-6 text-gray-900">Crowd Analytics</h3>
-                        <p class="text-lg text-gray-500">
-                            By aggregating anonymized location data and user reports, we estimate line lengths at TSA checkpoints, taxi queues, and baggage claim areas.
-                        </p>
-                    </div>
+    <!-- Architecture Diagram -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        
+        <div class="relative">
+            <!-- Connector Lines (SVG) -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style="z-index: 0;">
+                <path d="M200 100 Q 400 100 550 250" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="5,5" class="opacity-50" />
+                <path d="M200 300 Q 400 300 550 250" stroke="#22c55e" stroke-width="2" fill="none" stroke-dasharray="5,5" class="opacity-50" />
+                <path d="M200 500 Q 400 500 550 250" stroke="#06b6d4" stroke-width="2" fill="none" stroke-dasharray="5,5" class="opacity-50" />
+                <path d="M750 250 L 950 250" stroke="#a855f7" stroke-width="2" fill="none" />
+            </svg>
 
-                    <div class="space-y-5">
-                        <span class="h-12 w-12 rounded-md bg-blue-500 flex items-center justify-center">
-                            <i class="fas fa-brain text-white text-xl"></i>
-                        </span>
-                        <h3 class="text-2xl font-bold leading-6 text-gray-900">Predictive AI</h3>
-                        <p class="text-lg text-gray-500">
-                            Our historical models analyze weather patterns, incoming flight volume, and staffing schedules to forecast delays up to 4 hours in advance.
-                        </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+                
+                <!-- Sources Column -->
+                <div class="space-y-8 flex flex-col justify-center">
+                    <div class="bg-slate-900 border border-white/10 p-6 rounded-lg shadow-lg">
+                        <div class="text-neon-blue font-bold font-mono mb-2 text-sm">SOURCE 1</div>
+                        <h3 class="font-bold text-white">ADS-B Receivers</h3>
+                        <p class="text-xs text-gray-500 mt-2">Ground-based transponder signals from 30,000+ stations worldwide.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-white/10 p-6 rounded-lg shadow-lg">
+                        <div class="text-neon-green font-bold font-mono mb-2 text-sm">SOURCE 2</div>
+                        <h3 class="font-bold text-white">Satellite Links</h3>
+                        <p class="text-xs text-gray-500 mt-2">Inmarsat / Iridium uplinks for oceanic tracking coverage.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-white/10 p-6 rounded-lg shadow-lg">
+                        <div class="text-neon-cyan font-bold font-mono mb-2 text-sm">SOURCE 3</div>
+                        <h3 class="font-bold text-white">ATC Feeds</h3>
+                        <p class="text-xs text-gray-500 mt-2">Direct feeds from FAA (US), Eurocontrol (EU), and regional authorities.</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="mt-20 border-t border-gray-200 pt-10">
-                <h3 class="text-2xl font-bold text-gray-900 mb-5 text-center">Data Sources</h3>
-                <div class="flex justify-center space-x-10 grayscale opacity-50">
-                    <!-- Fake logos for "partners" or sources -->
-                    <div class="text-xl font-bold text-gray-600">OpenSky Network</div>
-                    <div class="text-xl font-bold text-gray-600">FAA System Command</div>
-                    <div class="text-xl font-bold text-gray-600">NOAA Weather</div>
+
+                <!-- Processing Core -->
+                <div class="flex items-center justify-center py-12 md:py-0">
+                    <div class="bg-slate-900 border-2 border-slate-700 p-8 rounded-2xl shadow-2xl w-full text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 opacity-50"></div>
+                        <div class="relative z-10">
+                            <i class="fa-solid fa-server text-5xl text-gray-400 mb-6 group-hover:text-white transition-colors"></i>
+                            <h2 class="text-2xl font-bold text-white font-mono mb-2">FlightQueue Core</h2>
+                            <p class="text-gray-400 text-sm mb-6">Data Normalization & ML Prediction Engine</p>
+                            <div class="flex justify-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-neon-green animate-ping"></span>
+                                <span class="text-xs text-neon-green font-mono">PROCESSING</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Output Column -->
+                <div class="flex items-center justify-center">
+                    <div class="bg-slate-900 border-2 border-neon-purple p-8 rounded-xl shadow-2xl shadow-neon-purple/20 w-full relative">
+                        <div class="absolute -top-3 left-8 bg-neon-purple text-white text-xs font-bold px-2 py-1 rounded">YOUR APP</div>
+                        <pre class="font-mono text-xs text-gray-300 overflow-x-auto whitespace-pre-wrap">
+// Your Application
+const flight = await FlightQueue.get('UA123');
+
+console.log(flight.status);
+> "en_route"
+
+console.log(flight.eta);
+> "14:35:00Z"
+                        </pre>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    
-     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
-            <div class="flex justify-center space-x-6 md:order-2">
-                <a href="terms.html" class="text-gray-400 hover:text-gray-500">Terms</a>
-                <a href="privacy.html" class="text-gray-400 hover:text-gray-500">Privacy</a>
+
+    <!-- Code Examples -->
+    <div class="bg-slate-900 py-20 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white font-mono mb-8">Integration in Minutes</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Example 1 -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-brands fa-js text-yellow-400"></i> Node.js SDK
+                    </h3>
+                    <div class="code-bg rounded-lg p-6 border border-white/10 overflow-x-auto">
+                        <pre class="font-mono text-sm text-gray-300">
+<span class="text-purple-400">import</span> { FlightQueue } <span class="text-purple-400">from</span> 'flightqueue-sdk';
+
+<span class="text-purple-400">const</span> client = <span class="text-purple-400">new</span> FlightQueue('sk_live_...');
+
+<span class="text-gray-500">// Subscribe to airport departures</span>
+client.stream.subscribe('departures', {
+  airport: 'JFK'
+});
+
+client.stream.on('flight_departure', (flight) => {
+  console.log(`Flight ${flight.id} departed!`);
+});
+                        </pre>
+                    </div>
+                </div>
+
+                <!-- Example 2 -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-brands fa-python text-blue-400"></i> Python SDK
+                    </h3>
+                    <div class="code-bg rounded-lg p-6 border border-white/10 overflow-x-auto">
+                        <pre class="font-mono text-sm text-gray-300">
+<span class="text-purple-400">import</span> flightqueue
+
+client = flightqueue.Client('sk_live_...')
+
+<span class="text-gray-500"># Get historical flight data</span>
+history = client.flights.history(
+    flight_id='AA100',
+    date='2025-12-25'
+)
+
+<span class="text-purple-400">print</span>(f"Flight duration: {history.duration_minutes}")
+                        </pre>
+                    </div>
+                </div>
             </div>
-            <div class="mt-8 md:mt-0 md:order-1">
-                 <p class="text-center text-base text-gray-400">&copy; 2026 Queue.latelogic.com. All rights reserved.</p>
-            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-white/10 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-gray-500 font-mono text-sm">FlightQueue API © 2026. Built by engineers, for engineers.</p>
         </div>
     </footer>
+
 </body>
 </html>
