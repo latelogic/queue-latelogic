@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Airport Delays Map - AirportDelay</title>
+    <meta name="description" content="View global airport delays and security wait times on an interactive map.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://openclaw.ai/favicon.png">
+    <style>
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: #f0f9ff url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg') no-repeat center center;
+            background-size: contain;
+            overflow: hidden;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--success);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+            transition: all 0.2s;
+        }
+
+        .map-pin:hover {
+            transform: scale(1.5);
+            z-index: 100;
+        }
+
+        .map-pin.bad {
+            background-color: var(--danger);
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+        }
+
+        .map-pin.fair {
+            background-color: var(--warning);
+            box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.2);
+        }
+
+        .pin-tooltip {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            display: none;
+            pointer-events: none;
+            z-index: 101;
+        }
+
+        .map-pin:hover .pin-tooltip {
+            display: block;
+        }
+
+        .map-legend {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link" style="text-decoration: none; color: var(--primary);">✈️ AirportDelay</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="airports.html" class="nav-link">Airports</a></li>
+                <li><a href="map.html" class="nav-link">Live Map</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="window.location.href='pricing.html'">Log In</button>
+            <button class="btn btn-primary" onclick="window.location.href='pricing.html'">Get Started</button>
+        </div>
+    </header>
+
+    <div class="map-container">
+        <!-- Pins placed roughly by % coordinates on the SVG map -->
+        <!-- North America -->
+        <a href="airport-detail.html?code=JFK" class="map-pin bad" style="top: 32%; left: 26%;">
+            <div class="pin-tooltip">JFK: 45m</div>
+        </a>
+        <a href="airport-detail.html?code=LAX" class="map-pin fair" style="top: 36%; left: 16%;">
+            <div class="pin-tooltip">LAX: 30m</div>
+        </a>
+        <a href="airport-detail.html?code=ATL" class="map-pin fair" style="top: 35%; left: 24%;">
+            <div class="pin-tooltip">ATL: 35m</div>
+        </a>
+        
+        <!-- Europe -->
+        <a href="airport-detail.html?code=LHR" class="map-pin fair" style="top: 25%; left: 47%;">
+            <div class="pin-tooltip">LHR: 25m</div>
+        </a>
+        <a href="airport-detail.html?code=AMS" class="map-pin bad" style="top: 24%; left: 48%;">
+            <div class="pin-tooltip">AMS: 55m</div>
+        </a>
+        <a href="airport-detail.html?code=CDG" class="map-pin bad" style="top: 26%; left: 48%;">
+            <div class="pin-tooltip">CDG: 50m</div>
+        </a>
+
+        <!-- Middle East -->
+        <a href="airport-detail.html?code=DXB" class="map-pin" style="top: 40%; left: 62%;">
+            <div class="pin-tooltip">DXB: 10m</div>
+        </a>
+
+        <!-- Asia -->
+        <a href="airport-detail.html?code=SIN" class="map-pin" style="top: 55%; left: 78%;">
+            <div class="pin-tooltip">SIN: 5m</div>
+        </a>
+        <a href="airport-detail.html?code=HND" class="map-pin" style="top: 35%; left: 85%;">
+            <div class="pin-tooltip">HND: 15m</div>
+        </a>
+
+        <div class="map-legend">
+            <div class="legend-item">
+                <div class="dot" style="background: var(--success);"></div>
+                <span>Short Wait (< 15m)</span>
+            </div>
+            <div class="legend-item">
+                <div class="dot" style="background: var(--warning);"></div>
+                <span>Moderate (15-45m)</span>
+            </div>
+            <div class="legend-item">
+                <div class="dot" style="background: var(--danger);"></div>
+                <span>Long Wait (> 45m)</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AirportDelay</h4>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Making travel smoother with real-time data.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="map.html">Live Map</a></li>
+                    <li><a href="airports.html">Airport Directory</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: var(--text-light); font-size: 0.8rem;">
+            &copy; 2026 LateLogic Inc. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

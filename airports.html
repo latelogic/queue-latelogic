@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Wait Times Directory - AirportDelay</title>
+    <meta name="description" content="Find security wait times for airports worldwide. Directory of 300+ airports including JFK, LHR, HND, DXB.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://openclaw.ai/favicon.png">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link">✈️ AirportDelay</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="airports.html" class="nav-link">Airports</a></li>
+                <li><a href="map.html" class="nav-link">Live Map</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="window.location.href='pricing.html'">Log In</button>
+            <button class="btn btn-primary" onclick="window.location.href='pricing.html'">Get Started</button>
+        </div>
+    </header>
+
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 4rem 1rem;">
+        <h1>Airport Directory</h1>
+        <p style="margin-bottom: 2rem; color: var(--text-light);">Real-time security wait times for major international airports.</p>
+
+        <div class="filter-bar" style="margin-bottom: 2rem;">
+            <button class="btn btn-primary" onclick="filterAirports('all')">All</button>
+            <button class="btn btn-outline" onclick="filterAirports('North America')">North America</button>
+            <button class="btn btn-outline" onclick="filterAirports('Europe')">Europe</button>
+            <button class="btn btn-outline" onclick="filterAirports('Asia')">Asia</button>
+            <button class="btn btn-outline" onclick="filterAirports('Middle East')">Middle East</button>
+        </div>
+
+        <div class="airport-grid" id="airportList">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AirportDelay</h4>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Making travel smoother with real-time data.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="map.html">Live Map</a></li>
+                    <li><a href="airports.html">Airport Directory</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="#">API Access</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: var(--text-light); font-size: 0.8rem;">
+            &copy; 2026 LateLogic Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const airports = [
+            { code: "JFK", name: "John F. Kennedy International", region: "North America", wait: 45, status: "bad" },
+            { code: "LHR", name: "Heathrow Airport", region: "Europe", wait: 25, status: "fair" },
+            { code: "DXB", name: "Dubai International", region: "Middle East", wait: 10, status: "good" },
+            { code: "HND", name: "Tokyo Haneda", region: "Asia", wait: 15, status: "good" },
+            { code: "ATL", name: "Hartsfield-Jackson Atlanta", region: "North America", wait: 35, status: "fair" },
+            { code: "LAX", name: "Los Angeles International", region: "North America", wait: 30, status: "fair" },
+            { code: "CDG", name: "Charles de Gaulle", region: "Europe", wait: 50, status: "bad" },
+            { code: "SIN", name: "Singapore Changi", region: "Asia", wait: 5, status: "good" },
+            { code: "AMS", name: "Amsterdam Schiphol", region: "Europe", wait: 55, status: "bad" },
+            { code: "FRA", name: "Frankfurt Airport", region: "Europe", wait: 40, status: "fair" },
+            { code: "IST", name: "Istanbul Airport", region: "Europe", wait: 20, status: "fair" },
+            { code: "ORD", name: "O'Hare International", region: "North America", wait: 25, status: "fair" },
+            { code: "DFW", name: "Dallas/Fort Worth", region: "North America", wait: 15, status: "good" },
+            { code: "CAN", name: "Guangzhou Baiyun", region: "Asia", wait: 30, status: "fair" },
+            { code: "PEK", name: "Beijing Capital", region: "Asia", wait: 45, status: "bad" },
+            { code: "DEN", name: "Denver International", region: "North America", wait: 60, status: "bad" },
+            { code: "DEL", name: "Indira Gandhi International", region: "Asia", wait: 35, status: "fair" },
+            { code: "CGK", name: "Soekarno-Hatta", region: "Asia", wait: 20, status: "fair" },
+            { code: "BKK", name: "Suvarnabhumi Airport", region: "Asia", wait: 40, status: "fair" },
+            { code: "ICN", name: "Incheon International", region: "Asia", wait: 10, status: "good" },
+            { code: "MAD", name: "Adolfo Suárez Madrid", region: "Europe", wait: 15, status: "good" },
+            { code: "BCN", name: "Josep Tarradellas Barcelona", region: "Europe", wait: 25, status: "fair" },
+            { code: "MUC", name: "Munich Airport", region: "Europe", wait: 10, status: "good" },
+            { code: "ZRH", name: "Zurich Airport", region: "Europe", wait: 5, status: "good" },
+            { code: "YYZ", name: "Toronto Pearson", region: "North America", wait: 50, status: "bad" },
+            { code: "SFO", name: "San Francisco International", region: "North America", wait: 20, status: "fair" },
+            { code: "SEA", name: "Seattle-Tacoma", region: "North America", wait: 35, status: "fair" },
+            { code: "MIA", name: "Miami International", region: "North America", wait: 40, status: "fair" },
+            { code: "DOH", name: "Hamad International", region: "Middle East", wait: 10, status: "good" }
+        ];
+
+        function renderAirports(list) {
+            const container = document.getElementById("airportList");
+            container.innerHTML = list.map(ap => `
+                <a href="airport-detail.html?code=${ap.code}" class="airport-card" style="text-decoration: none; color: inherit;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <h3 style="margin: 0; font-size: 1.25rem;">${ap.code}</h3>
+                        <span style="font-size: 0.8rem; color: var(--text-light);">${ap.region}</span>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.25rem; color: var(--text-dark); height: 2.5em; overflow: hidden;">${ap.name}</p>
+                    <div class="status-badge status-${ap.status}">Security: ${ap.wait}m</div>
+                </a>
+            `).join("");
+        }
+
+        function filterAirports(region) {
+            if (region === 'all') {
+                renderAirports(airports);
+            } else {
+                renderAirports(airports.filter(ap => ap.region === region));
+            }
+        }
+
+        // Initial render
+        renderAirports(airports);
+    </script>
+</body>
+</html>

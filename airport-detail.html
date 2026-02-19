@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wait Times - AirportDelay</title>
+    <meta name="description" content="Detailed security and immigration wait times for this airport.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://openclaw.ai/favicon.png">
+    <style>
+        .airport-header {
+            background: linear-gradient(to right, #0ea5e9, #0284c7);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: -3rem auto 3rem;
+            padding: 0 1rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            border: 1px solid #e2e8f0;
+        }
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            height: 200px;
+            padding-top: 2rem;
+        }
+        .bar {
+            flex: 1;
+            background: #e2e8f0;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.3s;
+        }
+        .bar:hover {
+            background: var(--primary);
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link" style="text-decoration: none; color: var(--primary);">✈️ AirportDelay</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="airports.html" class="nav-link">Airports</a></li>
+                <li><a href="map.html" class="nav-link">Live Map</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="window.location.href='pricing.html'">Log In</button>
+            <button class="btn btn-primary" onclick="window.location.href='pricing.html'">Get Started</button>
+        </div>
+    </header>
+
+    <div class="airport-header">
+        <h1 id="apName">Loading...</h1>
+        <p id="apCode" style="font-size: 1.5rem; opacity: 0.9;">...</p>
+        <p style="margin-top: 1rem;">Updated: Just now</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Security</h3>
+            <div class="stat-value" id="secWait">--</div>
+            <p id="secStatus">Unknown</p>
+        </div>
+        <div class="stat-card">
+            <h3>Immigration</h3>
+            <div class="stat-value" id="immWait">--</div>
+            <p>Avg Wait</p>
+        </div>
+        <div class="stat-card">
+            <h3>Check-in</h3>
+            <div class="stat-value" id="chkWait">--</div>
+            <p>Avg Wait</p>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 1rem;">
+        <h2 style="margin-bottom: 1.5rem;">Wait Time Forecast</h2>
+        <div class="chart-container">
+            <div class="bar-chart">
+                <div class="bar" style="height: 30%;"><span class="bar-label">6am</span></div>
+                <div class="bar" style="height: 50%;"><span class="bar-label">9am</span></div>
+                <div class="bar" style="height: 80%; background: var(--warning);"><span class="bar-label">12pm</span></div>
+                <div class="bar" style="height: 40%;"><span class="bar-label">3pm</span></div>
+                <div class="bar" style="height: 60%; background: var(--warning);"><span class="bar-label">6pm</span></div>
+                <div class="bar" style="height: 20%;"><span class="bar-label">9pm</span></div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; color: var(--text-light); font-size: 0.9rem;">
+                Based on historical data and flight schedules.
+            </p>
+        </div>
+
+        <h2 style="margin-bottom: 1.5rem;">Terminal Map</h2>
+        <div style="background: #e2e8f0; height: 300px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin-bottom: 4rem;">
+            <p style="color: var(--text-light);">Interactive Terminal Map Loading...</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AirportDelay</h4>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Making travel smoother with real-time data.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="map.html">Live Map</a></li>
+                    <li><a href="airports.html">Airport Directory</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: var(--text-light); font-size: 0.8rem;">
+            &copy; 2026 LateLogic Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mock Database
+        const db = {
+            "JFK": { name: "John F. Kennedy International", sec: "45m", imm: "30m", chk: "20m", status: "High Traffic", color: "var(--danger)" },
+            "LHR": { name: "Heathrow Airport", sec: "25m", imm: "45m", chk: "15m", status: "Moderate", color: "var(--warning)" },
+            "DXB": { name: "Dubai International", sec: "10m", imm: "15m", chk: "10m", status: "Smooth", color: "var(--success)" },
+            "LAX": { name: "Los Angeles International", sec: "30m", imm: "25m", chk: "20m", status: "Moderate", color: "var(--warning)" },
+            "HND": { name: "Tokyo Haneda", sec: "15m", imm: "20m", chk: "15m", status: "Smooth", color: "var(--success)" },
+            "SIN": { name: "Singapore Changi", sec: "5m", imm: "10m", chk: "5m", status: "Smooth", color: "var(--success)" },
+            "AMS": { name: "Amsterdam Schiphol", sec: "55m", imm: "40m", chk: "30m", status: "High Traffic", color: "var(--danger)" },
+            "FRA": { name: "Frankfurt Airport", sec: "40m", imm: "30m", chk: "25m", status: "High Traffic", color: "var(--danger)" },
+            "CDG": { name: "Charles de Gaulle", sec: "50m", imm: "35m", chk: "40m", status: "High Traffic", color: "var(--danger)" },
+            "ATL": { name: "Hartsfield-Jackson Atlanta", sec: "35m", imm: "20m", chk: "25m", status: "Moderate", color: "var(--warning)" }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code") || "JFK"; // Default to JFK
+
+        const data = db[code] || { name: code + " Airport", sec: "--", imm: "--", chk: "--", status: "Unknown", color: "#64748b" };
+
+        document.title = `Wait Times: ${code} - AirportDelay`;
+        document.getElementById("apName").innerText = data.name;
+        document.getElementById("apCode").innerText = code;
+        
+        const secEl = document.getElementById("secWait");
+        secEl.innerText = data.sec;
+        secEl.style.color = data.color;
+        
+        document.getElementById("secStatus").innerText = data.status;
+        document.getElementById("immWait").innerText = data.imm;
+        document.getElementById("chkWait").innerText = data.chk;
+
+    </script>
+</body>
+</html>

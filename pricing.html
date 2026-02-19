@@ -1,184 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing - FlightQueue API</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    colors: {
-                        slate: {
-                            850: '#1e293b',
-                            900: '#0f172a',
-                            950: '#020617',
-                        },
-                        neon: {
-                            blue: '#3b82f6',
-                            green: '#22c55e',
-                            cyan: '#06b6d4',
-                            red: '#ef4444',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Pricing - AirportDelay</title>
+    <meta name="description" content="Simple pricing for smart travelers. Choose the plan that fits your journey.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://openclaw.ai/favicon.png">
 </head>
-<body class="bg-slate-950 text-gray-200 font-sans antialiased">
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-3">
-                    <a href="/" class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded bg-neon-blue flex items-center justify-center">
-                            <i class="fa-solid fa-plane-up text-white text-sm transform -rotate-45"></i>
-                        </div>
-                        <span class="font-bold text-xl tracking-tight text-white font-mono">FlightQueue<span class="text-neon-cyan">_API</span></span>
-                    </a>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="/realtime-dashboard.html" class="text-gray-400 hover:text-white text-sm font-medium transition-colors">Live Dashboard</a>
-                    <a href="/pricing.html" class="text-white text-sm font-medium transition-colors">Pricing</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm font-medium transition-colors">Docs</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <a href="/login" class="text-gray-400 hover:text-white text-sm font-medium font-mono">Login</a>
-                    <a href="#" class="bg-white text-slate-950 px-4 py-2 rounded text-sm font-bold hover:bg-gray-200 transition-colors font-mono">Get API Key</a>
-                </div>
-            </div>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link" style="text-decoration: none; color: var(--primary);">✈️ AirportDelay</a>
         </div>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="airports.html" class="nav-link">Airports</a></li>
+                <li><a href="map.html" class="nav-link">Live Map</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="window.location.href='pricing.html'">Log In</button>
+            <button class="btn btn-primary" onclick="window.location.href='pricing.html'">Get Started</button>
+        </div>
+    </header>
 
-    <!-- Header -->
-    <div class="pt-32 pb-20 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white font-mono mb-6">Scaleable API Pricing</h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-            Start free, scale to millions of requests. No credit card required for sandbox.
-        </p>
+    <div style="text-align: center; padding: 4rem 1rem;">
+        <h1>Travel Smarter, Not Harder</h1>
+        <p style="color: var(--text-light); max-width: 600px; margin: 0 auto;">Join thousands of travelers who skip the line with AirportDelay.</p>
     </div>
 
-    <!-- Pricing Grid -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-            
-            <!-- Developer -->
-            <div class="bg-slate-900 rounded-xl border border-white/10 p-8 flex flex-col hover:border-white/30 transition-colors">
-                <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white font-mono">Hacker</h3>
-                    <p class="text-gray-500 text-sm mt-2">For hobbyists and testing.</p>
-                </div>
-                <div class="text-4xl font-bold text-white font-mono mb-6">$0<span class="text-lg text-gray-500 font-normal">/mo</span></div>
-                <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-400 font-mono">
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 1,000 requests/mo</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 1 request/sec rate limit</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Standard Support</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 24h Data History</li>
-                </ul>
-                <a href="#" class="block w-full py-3 rounded border border-white/20 text-center text-white font-bold hover:bg-white/5 transition-colors font-mono">Get Key</a>
-            </div>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>Basic</h3>
+            <div class="price">$0<span>/mo</span></div>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">For occasional travelers.</p>
+            <ul style="list-style: none; text-align: left; margin-bottom: 2rem;">
+                <li style="margin-bottom: 0.5rem;">✅ Current Wait Times</li>
+                <li style="margin-bottom: 0.5rem;">✅ Top 50 Airports</li>
+                <li style="margin-bottom: 0.5rem;">❌ Predictive Forecasts</li>
+                <li style="margin-bottom: 0.5rem;">❌ SMS Alerts</li>
+            </ul>
+            <button class="btn btn-outline" style="width: 100%;">Sign Up Free</button>
+        </div>
 
-            <!-- Startup -->
-            <div class="bg-slate-900 rounded-xl border-2 border-neon-blue p-8 flex flex-col relative overflow-hidden shadow-2xl shadow-neon-blue/10 transform scale-105 z-10">
-                <div class="absolute top-0 right-0 bg-neon-blue text-white text-xs font-bold font-mono px-3 py-1">RECOMMENDED</div>
-                <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white font-mono">Startup</h3>
-                    <p class="text-gray-500 text-sm mt-2">For production apps.</p>
-                </div>
-                <div class="text-4xl font-bold text-white font-mono mb-6">$299<span class="text-lg text-gray-500 font-normal">/mo</span></div>
-                <ul class="space-y-4 mb-8 flex-1 text-sm text-white font-mono">
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-blue"></i> 100,000 requests/mo</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-blue"></i> 50 requests/sec</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-blue"></i> Priority Email Support</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-blue"></i> 30-Day Data History</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-blue"></i> Webhooks (Beta)</li>
-                </ul>
-                <a href="#" class="block w-full py-3 rounded bg-neon-blue text-center text-white font-bold hover:bg-blue-600 transition-colors font-mono">Start Trial</a>
-            </div>
+        <div class="pricing-card highlight">
+            <div style="background: var(--primary); color: white; display: inline-block; padding: 0.25rem 0.5rem; border-radius: 99px; font-size: 0.8rem; margin-bottom: 1rem;">Most Popular</div>
+            <h3>Pro Traveler</h3>
+            <div class="price">$4.99<span>/mo</span></div>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">For frequent flyers.</p>
+            <ul style="list-style: none; text-align: left; margin-bottom: 2rem;">
+                <li style="margin-bottom: 0.5rem;">✅ Real-Time Global Data</li>
+                <li style="margin-bottom: 0.5rem;">✅ AI-Powered Forecasts</li>
+                <li style="margin-bottom: 0.5rem;">✅ SMS & Push Alerts</li>
+                <li style="margin-bottom: 0.5rem;">✅ Priority Support</li>
+            </ul>
+            <button class="btn btn-primary" style="width: 100%;">Start 7-Day Trial</button>
+        </div>
 
-            <!-- Enterprise -->
-            <div class="bg-slate-900 rounded-xl border border-white/10 p-8 flex flex-col hover:border-white/30 transition-colors">
-                <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white font-mono">Enterprise</h3>
-                    <p class="text-gray-500 text-sm mt-2">For high-volume data needs.</p>
-                </div>
-                <div class="text-4xl font-bold text-white font-mono mb-6">Custom</div>
-                <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-400 font-mono">
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Unlimited requests</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Custom Rate Limits</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Dedicated Slack Channel</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 5-Year Data History</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 99.99% SLA Guarantee</li>
-                </ul>
-                <a href="#" class="block w-full py-3 rounded border border-white/20 text-center text-white font-bold hover:bg-white/5 transition-colors font-mono">Contact Sales</a>
-            </div>
-
+        <div class="pricing-card">
+            <h3>Family</h3>
+            <div class="price">$12.99<span>/mo</span></div>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">Share with up to 5 people.</p>
+            <ul style="list-style: none; text-align: left; margin-bottom: 2rem;">
+                <li style="margin-bottom: 0.5rem;">✅ Everything in Pro</li>
+                <li style="margin-bottom: 0.5rem;">✅ 5 Family Accounts</li>
+                <li style="margin-bottom: 0.5rem;">✅ Shared Trip Dashboard</li>
+                <li style="margin-bottom: 0.5rem;">✅ Flight Tracking</li>
+            </ul>
+            <button class="btn btn-outline" style="width: 100%;">Get Family Plan</button>
         </div>
     </div>
 
-    <!-- Comparison Table -->
-    <div class="bg-slate-900 py-20 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-white font-mono mb-12 text-center">Feature Comparison</h2>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse font-mono text-sm">
-                    <thead>
-                        <tr class="border-b border-white/10">
-                            <th class="p-4 text-gray-500">Feature</th>
-                            <th class="p-4 text-white">Hacker</th>
-                            <th class="p-4 text-neon-blue">Startup</th>
-                            <th class="p-4 text-white">Enterprise</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-white/5 text-gray-400">
-                        <tr>
-                            <td class="p-4 text-white">Real-time Flight Position</td>
-                            <td class="p-4"><i class="fa-solid fa-check text-neon-green"></i></td>
-                            <td class="p-4"><i class="fa-solid fa-check text-neon-green"></i></td>
-                            <td class="p-4"><i class="fa-solid fa-check text-neon-green"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 text-white">Predictive Delays</td>
-                            <td class="p-4"><i class="fa-solid fa-xmark text-gray-600"></i></td>
-                            <td class="p-4"><i class="fa-solid fa-check text-neon-green"></i></td>
-                            <td class="p-4"><i class="fa-solid fa-check text-neon-green"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 text-white">Historical Lookback</td>
-                            <td class="p-4">24 Hours</td>
-                            <td class="p-4">30 Days</td>
-                            <td class="p-4">5 Years</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 text-white">Support SLA</td>
-                            <td class="p-4">None</td>
-                            <td class="p-4">24h Response</td>
-                            <td class="p-4">1h Response</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div style="background: var(--bg-light); padding: 4rem 2rem; text-align: center;">
+        <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <div style="margin-bottom: 2rem;">
+                <h4>How accurate are the wait times?</h4>
+                <p style="color: var(--text-light);">We aggregate data from official airport sources (TSA, Border Control) and crowd-sourced user reports to provide 95% accuracy.</p>
+            </div>
+            <div style="margin-bottom: 2rem;">
+                <h4>Can I cancel anytime?</h4>
+                <p style="color: var(--text-light);">Yes, you can cancel your subscription instantly from your dashboard. No hidden fees.</p>
+            </div>
+            <div style="margin-bottom: 2rem;">
+                <h4>Which airports are supported?</h4>
+                <p style="color: var(--text-light);">We cover over 300 major international airports across North America, Europe, Asia, and the Middle East.</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-white/10 py-12 text-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-gray-500 font-mono text-sm">FlightQueue API © 2026. All systems normal.</p>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AirportDelay</h4>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Making travel smoother with real-time data.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="map.html">Live Map</a></li>
+                    <li><a href="airports.html">Airport Directory</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: var(--text-light); font-size: 0.8rem;">
+            &copy; 2026 LateLogic Inc. All rights reserved.
         </div>
     </footer>
-
 </body>
 </html>
